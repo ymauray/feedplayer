@@ -1,0 +1,124 @@
+@CHARSET "UTF-8";
+
+.feedplayer-playlist {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.feedplayer-inner-playlist {
+	width: 9999px;
+}
+
+.feedplayer-item {
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.feedplayer-main-button {
+	display: inline-block;
+}
+
+.feedplayer-misc-buttons {
+	display: inline-block;
+}
+
+.feedplayer-pause-button {
+	display: none;
+}
+
+.feedplayer-info {
+	display: none;
+}
+
+.feedplayer-item-info {
+	display: none;
+}
+
+/* 
+ * Customization starts here
+ * ========================= 
+ */
+
+.feedplayer-playlist {
+	font-size: x-small;
+	height: 120px;
+}
+
+.feedplayer-button {
+	width: 30px;
+	height: 30px;
+}
+
+.feedplayer-main-button {
+	padding-right: 5px;
+}
+
+.feedplayer-play-button {
+	background-image: url("img/play.png");
+}
+
+.feedplayer-pause-button {
+	background-image: url("img/pause.png");
+}
+
+.feedplayer-selected-item {
+	background-color: #4D469C;
+}
+
+.feedplayer-hovered-item {
+	background-color: #3778CD;
+}
+
+.feedplayer-previous-button {
+	background-image: url('img/prev-17.png');
+	width: 17px;
+	height: 17px;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.feedplayer-next-button {
+	background-image: url('img/next-17.png');
+	width: 17px;
+	height: 17px;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.feedplayer-playlist-button {
+	font-size: xx-small;
+	padding: 0px 5px 0 5px;
+	margin: 0px 5px 0 0;
+	display: inline-block;
+}
+
+.feedplayer-info-button {
+	font-size: xx-small;
+	padding: 0px 5px 0 5px;
+	margin: 0px 5px 0 0;
+	display: inline-block;
+}
+
+.feedplayer {
+	border: 1px solid white;
+}
+
+.feedplayer-inner-playlist {
+	padding-left: 2px;
+}
+
+.feedplayer-controls {
+	border-bottom: 1px solid white;
+	padding: 3px;
+}
+
+.feedplayer-loading {
+	text-align: center;
+	width: 100%;
+	height: 100%;
+}
