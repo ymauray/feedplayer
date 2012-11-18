@@ -62,10 +62,28 @@ jQuery(document).ready(function($) {
 	});
 	
 	$('.feedplayer-playlist-button').click(function() {
-		var player= $(this).parents('.feedplayer');
+		var player = $(this).parents('.feedplayer');
 		player.find('.feedplayer-info').hide();
 		player.find('.feedplayer-inner-playlist').show();
 		event.preventDefault();
+	});
+	
+	$('.feedplayer-progress-bar').click(function(e) {
+		var player = $(this).parents('.feedplayer');
+		var id = player.attr('id');
+		var audioId = 'audio-' + id;
+		var audio = soundManager.getSoundById(audioId, true);
+		if (audio == null) {
+			// No audio loaded
+			return;
+		}
+		var x = e.offsetX;
+		var w = $('#' + id + ' .feedplayer-progress-bar').width();
+		var pct = (100.0 * x) / w;
+		audio.setPosition(audio.duration * x / w);
+		//soundManager._writeDebug('x: ' + x + ', w: ' + w + ', pct: ' + pct);
+		//$('#' + id + ' .feedplayer-progress-indicator').css('width', pct + '%');
+		
 	});
 });
 
@@ -100,8 +118,7 @@ function feedplayer_fetch_feed(id, url, items) {
 					// '+(bConnect?'true':'false'));
 				},
 				whileplaying: function() {
-					// soundManager._writeDebug('sound '+this.id+' playing,
-					// '+this.position+' of '+this.duration);
+					soundManager._writeDebug('sound '+this.id+' playing, '+this.position+' of '+this.duration);
 					var pct = 100.0 * this.position / this.duration;
 					soundManager._writeDebug('sound '+this.id+' playing, '+this.position+' of '+this.duration + ' (' + pct + ')');
 					jQuery('#' + id + ' .feedplayer-progress-indicator').css('width', pct + '%');
