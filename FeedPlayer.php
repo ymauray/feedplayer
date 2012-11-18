@@ -39,7 +39,7 @@ function feedplayer_shortcode($atts, $content = null) {
 	$html .= 'class="feedplayer">';
 	$html .= '<div class="feedplayer-controls">';
 	$html .= '<div class="feedplayer-main-button"><div class="feedplayer-button feedplayer-play-button"></div><div class="feedplayer-button feedplayer-pause-button"></div></div>';
-	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-previous-button"></div><div class="feedplayer-next-button"></div><div class="feedplayer-progress-bar"><div class="feedplayer-progress-indicator"></div></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a></div></div>';
+	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-button feedplayer-previous-button"></div><div class="feedplayer-button feedplayer-next-button"></div><div class="feedplayer-progress-bar"><div class="feedplayer-progress-indicator"></div></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a></div></div>';
 	$html .= '</div>'; // feedplayer-controls
 
 	$html .= '<div class="feedplayer-playlist">';

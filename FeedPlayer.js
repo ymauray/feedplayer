@@ -14,7 +14,10 @@ jQuery(document).ready(function($) {
 	$('.feedplayer-play-button').click(function() {
 		var player = $(this).parents('.feedplayer');
 		var audioId = 'audio-' + player.attr('id');
-		if (player.find('.feedplayer-selected-item').size() == 0) return;
+		if (player.find('.feedplayer-selected-item').size() == 0) {
+			player.find('.feedplayer-item').first().click();
+			return;
+		}
 		soundManager.resume(audioId);
 		$(this).hide();
 		player.find('.feedplayer-pause-button').show();

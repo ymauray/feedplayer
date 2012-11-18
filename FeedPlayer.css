@@ -27,6 +27,10 @@
 	display: inline-block;
 }
 
+.feedplayer-button, .feedplayer-progress-bar {
+	cursor: pointer;
+}
+
 .feedplayer-pause-button {
 	display: none;
 }
@@ -131,6 +135,7 @@
 	display: inline-block;
 	height: 5px;
 	width: 120px;
+	border-radius: 5px;
 }
 
 .feedplayer-progress-indicator {
