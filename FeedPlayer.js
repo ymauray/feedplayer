@@ -74,7 +74,7 @@ function feedplayer_fetch_feed(id, url, items) {
 	};
 
 	jQuery.post(params.ajaxurl, data, function(response) {
-		var innerPlaylist = jQuery('#' + id + ' .feedplayer-inner-playlist');
+		var innerPlaylist = jQuery('#' + id + ' .feedplayer-playlist');
 		innerPlaylist.removeClass('feedplayer-loading');
 		innerPlaylist.html(response);
 		
@@ -99,6 +99,10 @@ function feedplayer_fetch_feed(id, url, items) {
 				whileplaying: function() {
 					// soundManager._writeDebug('sound '+this.id+' playing,
 					// '+this.position+' of '+this.duration);
+					var pct = 100.0 * this.position / this.duration;
+					soundManager._writeDebug('sound '+this.id+' playing, '+this.position+' of '+this.duration + ' (' + pct + ')');
+					jQuery('#' + id + ' .feedplayer-progress-indicator').css('width', pct + '%');
+					soundManager._writeDebug(jQuery('#' + id + ' .feedplayer-progress-indicator').css('width'));
 				}
 			});
 			sound.stop();

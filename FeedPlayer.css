@@ -90,18 +90,17 @@
 	margin-right: 5px;
 }
 
-.feedplayer-playlist-button {
+.feedplayer-misc-buttons a {
 	font-size: xx-small;
 	padding: 0px 5px 0 5px;
 	margin: 0px 5px 0 0;
 	display: inline-block;
 }
 
+.feedplayer-playlist-button {
+}
+
 .feedplayer-info-button {
-	font-size: xx-small;
-	padding: 0px 5px 0 5px;
-	margin: 0px 5px 0 0;
-	display: inline-block;
 }
 
 .feedplayer {
@@ -121,4 +120,21 @@
 	text-align: center;
 	width: 100%;
 	height: 100%;
+}
+
+.feedplayer-info {
+	padding: 2px;
+}
+
+.feedplayer-progress-bar {
+	border: 1px solid white;
+	display: inline-block;
+	height: 5px;
+	width: 120px;
+}
+
+.feedplayer-progress-indicator {
+	background: white;
+	height: 100%;
+	width: 0%;
 }

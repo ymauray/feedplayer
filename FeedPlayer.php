@@ -34,36 +34,12 @@ function feedplayer_shortcode($atts, $content = null) {
 
 	if ($url == 'undefined') return;
 
-	// 	$parser = YParser::parse($url, $items);
-
-	// 	$html = '<div ';
-	// 	if ($id != 'undefined') $html .= 'id="' . $id . '" ';
-	// 	$html .= 'class="feedplayer">';
-
-	// 	$html .= '<div class="feedplayer-controls">';
-	// 	$html .= '<div class="feedplayer-main-button"><div class="feedplayer-button feedplayer-play-button"></div><div class="feedplayer-button feedplayer-pause-button"></div></div>';
-	// 	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-previous-button"></div><div class="feedplayer-next-button"></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a></div></div>';
-	// 	$html .= '</div>';
-
-	// 	$html .= '<div class="feedplayer-playlist">';
-	// 	$html .= '<div class="feedplayer-inner-playlist">';
-	// 	foreach ($parser->items as $item) {
-	// 		if ($item->enclosure != null) {
-	// 			$html .= '<div class="feedplayer-item" enclosure="' . $item->enclosure . '">' . $item->title . '<div class="feedplayer-item-info">' . $item->description . '</div></div>';
-	// 		}
-	// 	}
-	// 	$html .= '</div>'; // feedplayer-inner-playlist
-	// 	$html .= '<div class="feedplayer-info">Lorem ipsum dolor sit amet et fluctuat nec mergitur alea jacta est et caetera.</div>';
-	// 	$html .= '</div>'; // feedplayer-playlist
-
-	// 	$html .= '</div>'; // feedplayer
-
 	$html = '<div ';
 	if ($id != 'undefined') $html .= 'id="' . $id . '" ';
 	$html .= 'class="feedplayer">';
 	$html .= '<div class="feedplayer-controls">';
 	$html .= '<div class="feedplayer-main-button"><div class="feedplayer-button feedplayer-play-button"></div><div class="feedplayer-button feedplayer-pause-button"></div></div>';
-	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-previous-button"></div><div class="feedplayer-next-button"></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a></div></div>';
+	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-previous-button"></div><div class="feedplayer-next-button"></div><div class="feedplayer-progress-bar"><div class="feedplayer-progress-indicator"></div></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a></div></div>';
 	$html .= '</div>'; // feedplayer-controls
 
 	$html .= '<div class="feedplayer-playlist">';
@@ -81,8 +57,11 @@ function feedplayer_shortcode($atts, $content = null) {
 
 function feedplayer_enqueue_scripts() {
 	wp_register_script('feedplayer-scritps', plugins_url('FeedPlayer.js', __FILE__), array('jquery', 'jquery-ui-datepicker'));
-	$translation_array = array('swf' => plugins_url('swf', __FILE__));
-	$translation_array = array('ajaxurl' => admin_url('admin-ajax.php'));
+	$translation_array = array(
+			'swf' => plugins_url('swf', __FILE__),
+			'popouturl' => plugins_url('PopOut.php', __FILE__),
+			'ajaxurl' => admin_url('admin-ajax.php')
+	);
 	wp_localize_script('feedplayer-scritps', 'params', $translation_array);
 	wp_enqueue_script('feedplayer-scritps');
 
@@ -100,23 +79,20 @@ add_action('wp_ajax_get_feed', 'get_feed_callback');
 add_action('wp_ajax_nopriv_get_feed', 'get_feed_callback');
 
 function get_feed_callback() {
-	//echo 'hello from get_feed_callback, with url = ' . $_REQUEST['url'] . ' !';
 	$url = $_REQUEST['url'];
 	$items = $_REQUEST['items'];
 	$parser = YParser::parse($url, $items);
-	$html = '';
+	$html = '<div class="feedplayer-inner-playlist">';
 	foreach ($parser->items as $item) {
 		if ($item->enclosure != null) {
 			//$html .= '<div class="feedplayer-item" enclosure="' . $item->enclosure . '">' . $item->title . '<div class="feedplayer-item-info">' . $item->description . '</div></div>';
 			$html .= '<div class="feedplayer-item" enclosure="' . $item->enclosure . '">' . $item->title . '</div>';
 		}
 	}
+	$html .= '</div>'; // feedplayer-inner-playlist
+	$html .= '<div class="feedplayer-info">' . $parser->description . '</div>';
 	echo $html;
 	die();
 }
-
-//wp_register_style('jquery-ui', plugins_url('ui/jquery-ui.css', __FILE__));
-//wp_enqueue_style('jquery-ui');
-
 
 ?>
