@@ -9,8 +9,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 	
-	// jQuery.ajax(params.queryFeed, {data: {feed: 'toto'}});
-	
 	$('.feedplayer-play-button').click(function() {
 		var player = $(this).parents('.feedplayer');
 		var audioId = 'audio-' + player.attr('id');
@@ -79,11 +77,7 @@ jQuery(document).ready(function($) {
 		}
 		var x = e.offsetX;
 		var w = $('#' + id + ' .feedplayer-progress-bar').width();
-		var pct = (100.0 * x) / w;
 		audio.setPosition(audio.duration * x / w);
-		//soundManager._writeDebug('x: ' + x + ', w: ' + w + ', pct: ' + pct);
-		//$('#' + id + ' .feedplayer-progress-indicator').css('width', pct + '%');
-		
 	});
 });
 
@@ -106,9 +100,9 @@ function feedplayer_fetch_feed(id, url, items) {
 			player.find('.feedplayer-selected-item').removeClass('feedplayer-selected-item');
 			jQuery(this).addClass('feedplayer-selected-item');
 			var enclosure = jQuery(this).attr('enclosure');
-			var description = jQuery(this).find('.feedplayer-item-info').html();
-			player.find('.feedplayer-info').empty();
-			player.find('.feedplayer-info').append(description);
+//			var description = jQuery(this).find('.feedplayer-item-info').html();
+//			player.find('.feedplayer-info').empty();
+//			player.find('.feedplayer-info').append(description);
 			soundManager.destroySound(audioId);
 			var sound = soundManager.createSound({
 				id: audioId,
