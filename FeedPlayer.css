@@ -43,6 +43,14 @@
 	display: none;
 }
 
+.feedplayer-volume-label {
+	cursor: default;
+}
+
+.feedplayer-volume-bar {
+	cursor: pointer;
+}
+
 /* 
  * Customization starts here
  * ========================= 
@@ -94,7 +102,7 @@
 	margin-right: 5px;
 }
 
-.feedplayer-misc-buttons a {
+.feedplayer-misc-buttons a, .feedplayer-misc-buttons span  {
 	font-size: xx-small;
 	padding: 0px 5px 0 5px;
 	margin: 0px 5px 0 0;
@@ -142,4 +150,18 @@
 	background: white;
 	height: 100%;
 	width: 0%;
+}
+
+.feedplayer-volume-bar {
+	border: 1px solid white;
+	display: inline-block;
+	height: 5px;
+	width: 49px;
+	border-radius: 5px;	
+}
+
+.feedplayer-volume-indicator {
+	background: white;
+	height: 100%;
+	width: 50%;
 }

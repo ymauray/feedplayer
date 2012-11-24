@@ -1,21 +1,21 @@
 <?php
 /*
- Plugin Name: Feed Player
-Plugin URI: http://musicpodcasting.org/feedplayer/
-Description: Feed Player for AMP
-Version: 0.1.alpha
-Author: AMP web team
-Author URI: http://www.musicpodcasting.org/
+Plugin Name: Feed Player
+Plugin URI: http://yma.dk/wordpress/feedplayer/
+Description: HTML5 audio player capable of reading a podcast feed. 
+Version: 1.1
+Author: Yannick Mauray
+Author URI: http://yma.dk/wordpress
 Contributors:
 Yannick Mauray (Euterpia Radio)
-Dave Lee (The Bugcast)
 Justin Wayne (The Justin Wayne Show)
+Peter Clitheroe (Suffolk'n'Cool)
 
 Credits:
 
-Copyright 2012 AMP
+Copyright 2012 Yannick Mauray
 
-License: GPL (http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt)
+License: GPL v3 (http://www.gnu.org/licenses/gpl-3.0.txt)
 */
 
 /*
@@ -39,7 +39,7 @@ function feedplayer_shortcode($atts, $content = null) {
 	$html .= 'class="feedplayer">';
 	$html .= '<div class="feedplayer-controls">';
 	$html .= '<div class="feedplayer-main-button"><div class="feedplayer-button feedplayer-play-button"></div><div class="feedplayer-button feedplayer-pause-button"></div></div>';
-	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-button feedplayer-previous-button"></div><div class="feedplayer-button feedplayer-next-button"></div><div class="feedplayer-progress-bar"><div class="feedplayer-progress-indicator"></div></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a></div></div>';
+	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-button feedplayer-previous-button"></div><div class="feedplayer-button feedplayer-next-button"></div><div class="feedplayer-progress-bar"><div class="feedplayer-progress-indicator"></div></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a><span class="feedplayer-volume-label">Vol. :</span><div class="feedplayer-volume-bar"><div class="feedplayer-volume-indicator"></div></div></div></div>';
 	$html .= '</div>'; // feedplayer-controls
 
 	$html .= '<div class="feedplayer-playlist">';
@@ -73,10 +73,20 @@ function feedplayer_enqueue_scripts() {
 }
 
 add_shortcode('feedplayer', 'feedplayer_shortcode');
-add_action('wp_enqueue_scripts', 'feedplayer_enqueue_scripts');
 
+add_action('init', 'feedplayer_activate_autoupdate');  
+add_action('wp_enqueue_scripts', 'feedplayer_enqueue_scripts');
 add_action('wp_ajax_get_feed', 'get_feed_callback');
 add_action('wp_ajax_nopriv_get_feed', 'get_feed_callback');
+
+function feedplayer_activate_autoupdate()
+{
+	require_once ('autoupdate/wp_autoupdate.php');
+	$current_version = feedplayer_get_version();
+	$slug = plugin_basename(__FILE__);
+	$remote_path = 'http://yma.dk/wordpress/update/FeedPlayer.php';
+	new wp_auto_update($current_version, $remote_path, $slug);
+}
 
 function get_feed_callback() {
 	$url = $_REQUEST['url'];
@@ -93,6 +103,14 @@ function get_feed_callback() {
 	$html .= '<div class="feedplayer-info">' . $parser->description . '</div>';
 	echo $html;
 	die();
+}
+
+function feedplayer_get_version() {
+	if (!function_exists('get_plugins'))
+		require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+	$plugin_folder = get_plugins('/' . plugin_basename(dirname(__FILE__)));
+	$plugin_file = basename((__FILE__));
+	return $plugin_folder[$plugin_file]['Version'];
 }
 
 ?>
