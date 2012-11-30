@@ -3,7 +3,7 @@
 Plugin Name: Feed Player
 Plugin URI: http://yma.dk/wordpress/feedplayer/
 Description: HTML5 audio player capable of reading a podcast feed. 
-Version: 1.1
+Version: 1.2
 Author: Yannick Mauray
 Author URI: http://yma.dk/wordpress
 Contributors:
@@ -39,7 +39,7 @@ function feedplayer_shortcode($atts, $content = null) {
 	$html .= 'class="feedplayer">';
 	$html .= '<div class="feedplayer-controls">';
 	$html .= '<div class="feedplayer-main-button"><div class="feedplayer-button feedplayer-play-button"></div><div class="feedplayer-button feedplayer-pause-button"></div></div>';
-	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-button feedplayer-previous-button"></div><div class="feedplayer-button feedplayer-next-button"></div><div class="feedplayer-progress-bar"><div class="feedplayer-progress-indicator"></div></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a><span class="feedplayer-volume-label">Vol. :</span><div class="feedplayer-volume-bar"><div class="feedplayer-volume-indicator"></div></div></div></div>';
+	$html .= '<div class="feedplayer-misc-buttons"><div><div class="feedplayer-button feedplayer-previous-button"></div><div class="feedplayer-button feedplayer-next-button"></div><div class="feedplayer-progress-bar"><div class="feedplayer-progress-indicator"></div></div></div><div><a href="#" class="feedplayer-playlist-button">Playlist</a><a href="#" class="feedplayer-info-button">Info</a><a href="#" class="feedplayer-volume-label">Vol. :</a><div class="feedplayer-volume-bar"><div class="feedplayer-volume-indicator"></div></div></div></div>';
 	$html .= '</div>'; // feedplayer-controls
 
 	$html .= '<div class="feedplayer-playlist">';

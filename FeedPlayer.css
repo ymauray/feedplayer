@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
 
+	
+.feedplayer {
+	text-align: left;
+}
+
 .feedplayer-playlist {
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -45,6 +50,10 @@
 
 .feedplayer-volume-label {
 	cursor: default;
+}
+
+.feedplayer-volume-label:hover {
+	text-decoration: none;
 }
 
 .feedplayer-volume-bar {
