@@ -3,7 +3,7 @@
 Plugin Name: Feed Player
 Plugin URI: http://yma.dk/wordpress/feedplayer/
 Description: HTML5 audio player capable of reading a podcast feed. 
-Version: 1.2
+Version: 1.3
 Author: Yannick Mauray
 Author URI: http://yma.dk/wordpress
 Contributors:

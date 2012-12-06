@@ -2,11 +2,19 @@
 
 jQuery(document).ready(function($) {
 	
+	function fixFirefox(e) {
+		if (typeof e.offsetX === "undefined" || typeof e.offsetY === "undefined") {
+			   var targetOffset = $(e.target).offset();
+			   e.offsetX = e.pageX - targetOffset.left;
+			   e.offsetY = e.pageY - targetOffset.top;
+		}
+		return e;
+	}
+
 	/* Init soundmanager2 */
 	soundManager.setup({
 		url: params.swf,
 		onready: function() {
-			soundManager.setVolume(50);
 		}
 	});
 	
@@ -76,6 +84,7 @@ jQuery(document).ready(function($) {
 			// No audio loaded
 			return;
 		}
+		e = fixFirefox(e);
 		var x = e.offsetX;
 		var w = $('#' + id + ' .feedplayer-progress-bar').width();
 		audio.setPosition(audio.duration * x / w);
@@ -90,6 +99,7 @@ jQuery(document).ready(function($) {
 			// No audio loaded
 			return;
 		}
+		e = fixFirefox(e);
 		var x = e.offsetX;
 		var w = $('#' + id + ' .feedplayer-volume-bar').width();
 		var pct = 100.0 * x / w;
@@ -117,13 +127,14 @@ function feedplayer_fetch_feed(id, url, items) {
 			player.find('.feedplayer-selected-item').removeClass('feedplayer-selected-item');
 			jQuery(this).addClass('feedplayer-selected-item');
 			var enclosure = jQuery(this).attr('enclosure');
-			soundManager.destroySound(audioId);
+			var sound = soundManager.getSoundById(audioId, true);
+			if (sound != null) soundManager.destroySound(audioId);
+			var pct = 100.0 * jQuery('.feedplayer-volume-indicator', player).first().width() / jQuery('.feedplayer-volume-bar', player).first().width();
 			var sound = soundManager.createSound({
 				id: audioId,
 				url: enclosure,
+				volume: pct,
 				onconnect: function(bConnect) {
-					// soundManager._writeDebug(this.id+' connected:
-					// '+(bConnect?'true':'false'));
 				},
 				whileplaying: function() {
 					var pct = 100.0 * this.position / this.duration;
@@ -131,7 +142,7 @@ function feedplayer_fetch_feed(id, url, items) {
 				}
 			});
 			sound.stop();
-			sound.play(); // will result in connection being made
+			sound.play();
 			player.find('.feedplayer-play-button').hide();
 			player.find('.feedplayer-pause-button').show();
 		});
